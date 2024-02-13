@@ -1,0 +1,89 @@
+<% layout('layouts/boilerpalte') -%> 
+<!-- to insert this page in main part of boilerpaltewhere body tag inserted  -->
+<!-- add fash -->
+<%- include('../partials/flash') %>  
+
+<div class="row">
+  <div class="col-md-6 mx-auto my-5">
+   
+    <form action="/products" method="POST"  class=" needs-validation" novalidate>
+        <div class="mb-3">
+          <label for="name" class="form-label">NAME:</label>
+          <input type="text" class="form-control" id="name" name="name"  required>
+          <div class="invalid-feedback">
+            Please fill!
+          </div>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+         
+        </div>
+
+
+        <div class="mb-3">
+          <label for="img" class="form-label">IMAGE:</label>
+          <input type="text" class="form-control" id="image"  name="img"  required>
+          <div class="invalid-feedback">
+            Please fill!
+          </div>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+
+        <div class="mb-3">
+            <label class="form-label" for="dec">Description:</label>
+            <textarea class="form-control" name="dec" id="dec" rows="5"  required></textarea>
+            <div class="invalid-feedback">
+              Please fill!
+            </div>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+
+
+          <div class="input-group mb-3">
+            <label for="price" class="form-label">Price:</label>
+            <span class="input-group-text" id="price">$</span>
+            <input type="text" class="form-control" name="price" placeholder="Price"  required>
+            <div class="invalid-feedback">
+              Please fill!
+            </div>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+
+
+          </div>
+        
+        <button type="submit" class="btn btn-success">ADD+</button>
+      </form>
+  </div>
+</div>
+
+<script>
+  
+  (function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()   //function calling itself iife [immediate invoke function expression]
+  
+    </script>
+    

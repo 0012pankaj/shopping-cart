@@ -1,0 +1,73 @@
+:root{
+    --main-color:#0c0d0e;
+}
+
+
+main{
+    margin-top: 5.5rem;
+}
+
+
+.products .card img{
+    height: 200px;
+    padding: 14px;
+    
+}
+
+.show-btn{
+    background-color: var(--main-color);
+    color:white;
+}
+
+.show-btn:hover{
+    color: white;
+}
+
+.navbar-brand {
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 0.1em;
+}
+#heading {
+    width: 100%;
+    background-color: white;
+    padding: 16px;
+    margin: 10px auto;
+    margin-bottom: 25px;
+    border-radius: 10px;
+     
+    
+    
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+footer{
+    background-color: var(--main-color);
+    margin-top: 50px;
+    position: relative;
+}
+
+@media screen and (max-width:560px){
+    .reviews-section{
+        width: 90vw;
+    }
+    #heading{
+
+        width: 75vw;
+        font-weight:300; 
+    }
+}
+
+@media screen and (max-width:460px){
+   
+    #heading{
+        width: 90vw;
+    }
+}
+
+.fas.fa-heart{
+    color: red;
+}

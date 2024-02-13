@@ -1,0 +1,96 @@
+<% layout('layouts/boilerpalte') -%> 
+<!-- to insert this page in main part of boilerpaltewhere body tag inserted  -->
+<!-- bootstrap alleart section -->
+
+<section class="container-lg" style=" padding-bottom: 80px;">
+    <section id="heading" class=" shadow-lg"> 
+        <h4 class="display-4" style="font-weight: bold; font-family: Orbitron, sans-serif;
+        "><i class="fa-brands fa-opencart" style="margin-right: 20px; "></i>Cart</h4>
+      </section> 
+    <%  if(user.cart.length === 0){ %>
+        <div class="alert alert-primary" role="alert">
+          Cart is Empty !!!
+        </div>
+   <% } %>
+      
+      <div class="row">
+          <div class="col-lg-8">
+              
+              <% for(let item of user.cart){ %>
+                  <div class="card mx-auto mb-3 " style="max-width: 600px;">
+                      <div class="row g-0 shadow-lg">
+                        <div class="col-4">
+                          <img src="<%=item.img%>" style="height:150px ;width: 120px; " class="img-fluid rounded-start mx-4 shadow-lg my-3" alt="...">
+                        </div>
+                        <div class="col-8">
+                          <div class="card-body">
+                            <h5 class="card-title"><%=item.name%></h5>
+                            <p class="card-text"><%=item.dec.slice(0,70)%> span</p>
+                 
+                <form method="POST" action="/user/<%=item._id%>/remove"  class="d-flex mx-3 ">
+                    <button type="submit" class="btn btn-sm btn-danger " >Remove -</button>
+                    <p class="card-text px-3"><small class="text-muted">Last updated few mins ago</small> 
+                  </form>
+                </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              <%} %> 
+          </div>
+          <div class="col-lg-4 " >
+              <ul class="list-group shadow-lg ">
+                  <% for(let item of user.cart) {%>
+                      <li class="list-group-item"><span class="fw-bold"><%=item.name%> - </span> $ <%=item.price%> <span></span></li>
+                  <% } %> 
+                  <li class="list-group-item fw-bold shadow-lg border border-top border-top-3 border-black mt-3" >Total Amount : <span style="color: forestgreen;">$ <%=totalAmount%></span></li>
+              </ul>
+   
+             
+ 
+                <form id="paymentForm" action="/create-checkout-session" method="POST">
+                  <input type="hidden" name="totalamount" value="<%=totalAmount%>"/>
+                  <input type="hidden"  name="products" 
+                   value="<%=user.cart%>"/> 
+                   
+                   <button id="checkoutButton" type="submit" class="btn btn-sm btn-outline-success my-3 " >Checkout</button>
+               
+                 </form>
+    
+  
+          </div>
+      </div>
+  
+     
+  </section>
+
+
+  
+  <!-- Include Stripe.js library -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+  const button =document.getElementById('checkoutButton');
+
+
+button.addEventListener("click", () => {
+  fetch("http://localhost:3000/create-checkout-session", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({totalAmount}) 
+  })
+  .then(res => {
+      if (res.ok) return res.json()
+      return res.json().then(json => Promise.reject(json))
+    })
+    .then(({ url }) => {
+      window.location = url
+    })
+    .catch(e => {
+      console.error(e.error)
+    })
+ 
+})
+</script>
